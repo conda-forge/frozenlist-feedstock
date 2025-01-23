@@ -7,13 +7,17 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/frozenlist-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/frozenlist-{{ version }}.tar.gz
   sha256: 81d5af29e61b9c8348e876d442253723928dce6433e0e76cd925cd83f1b4b817
 
 build:
-  number: 0
-  skip: true  # [py<38]
-  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  number: 1
+  noarch: python       # [use_noarch]
+  track_features:      # [use_noarch]
+    - frozenlist_no_compile  # [use_noarch]
+  script:
+    - {{ PYTHON }} -m pip install . --no-deps -vv                                      # [not use_noarch]
+    - {{ PYTHON }} -m pip install . --no-deps -vv  --config-settings=pure-python=true  # [use_noarch]
 
 requirements:
   build:
@@ -23,14 +27,18 @@ requirements:
     - {{ compiler('c') }}
     - {{ stdlib("c") }}
   host:
-    - python
+    - python {{ python_min }}     # [use_noarch]
+    - python                      # [not use_noarch]
+  host:
+    - python {{ python_min }}     # [use_noarch]
+    - python                      # [not use_noarch]
     - pip
     - cython
     - expandvars
     - setuptools >=47
-    - tomli  # [py<311]
   run:
-    - python
+    - python >={{ python_min }}   # [use_noarch]
+    - python                      # [not use_noarch]
 
 test:
   imports:
@@ -39,6 +47,7 @@ test:
     - pip check
   requires:
     - pip
+    - python {{ python_min }}     # [use_noarch]
 
 about:
   home: https://github.com/aio-libs/frozenlist
