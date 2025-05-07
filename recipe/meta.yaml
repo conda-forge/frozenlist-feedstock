@@ -1,5 +1,5 @@
 {% set name = "frozenlist" %}
-{% set version = "1.5.0" %}
+{% set version = "1.6.0" %}
 
 
 package:
@@ -8,12 +8,12 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/frozenlist-{{ version }}.tar.gz
-  sha256: 81d5af29e61b9c8348e876d442253723928dce6433e0e76cd925cd83f1b4b817
+  sha256: b99655c32c1c8e06d111e7f41c06c29a5318cb1835df23a45518e02a47c63b68
 
 build:
-  number: 1
-  noarch: python       # [use_noarch]
-  track_features:      # [use_noarch]
+  number: 0
+  noarch: python             # [use_noarch]
+  track_features:            # [use_noarch]
     - frozenlist_no_compile  # [use_noarch]
   script:
     - {{ PYTHON }} -m pip install . --no-deps -vv                                      # [not use_noarch]
@@ -25,6 +25,7 @@ requirements:
     - cross-python_{{ target_platform }}     # [build_platform != target_platform]
     - cython                                 # [build_platform != target_platform]
     - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
     - {{ stdlib("c") }}
   host:
     - python {{ python_min }}     # [use_noarch]
