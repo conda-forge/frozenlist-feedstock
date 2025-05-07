@@ -12,8 +12,8 @@ source:
 
 build:
   number: 0
-  noarch: python       # [use_noarch]
-  track_features:      # [use_noarch]
+  noarch: python             # [use_noarch]
+  track_features:            # [use_noarch]
     - frozenlist_no_compile  # [use_noarch]
   script:
     - {{ PYTHON }} -m pip install . --no-deps -vv                                      # [not use_noarch]
