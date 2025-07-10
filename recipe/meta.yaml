@@ -1,5 +1,5 @@
 {% set name = "frozenlist" %}
-{% set version = "1.6.0" %}
+{% set version = "1.6.2" %}
 
 
 package:
@@ -7,8 +7,8 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/frozenlist-{{ version }}.tar.gz
-  sha256: b99655c32c1c8e06d111e7f41c06c29a5318cb1835df23a45518e02a47c63b68
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: effc641518696471cf4962e8e32050133bc1f7b2851ae8fd0cb8797dd70dc202
 
 build:
   number: 0
