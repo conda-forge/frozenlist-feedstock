@@ -30,9 +30,6 @@ requirements:
   host:
     - python {{ python_min }}     # [use_noarch]
     - python                      # [not use_noarch]
-  host:
-    - python {{ python_min }}     # [use_noarch]
-    - python                      # [not use_noarch]
     - pip
     - cython
     - expandvars
